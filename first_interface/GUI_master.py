@@ -27,11 +27,11 @@ class ComGUI():
 
 
    def ComOptionMenu(self):
-      coms = ["-", "COM3", "COM4", "COM5","COM6","COM7","COM8"]
+      self.serial.getCOMList()      
       self.clicked_com = StringVar()
-      self.clicked_com.set(coms[0])
+      self.clicked_com.set(self.serial.com_list[0])
       self.drop_com = OptionMenu(
-         self.frame, self.clicked_com, *coms, command=self.Connect_ctrl)
+         self.frame, self.clicked_com, *self.serial.com_list, command=self.Connect_ctrl)
       self.drop_com.config(width=10)
 
 
@@ -61,7 +61,11 @@ class ComGUI():
 
    
    def com_refresh(self):
-      print("Refresh")
+      self.drop_com.destroy()
+      self.ComOptionMenu()
+      self.drop_com.grid(column=2, row=2)
+      logic = []
+      self.Connect_ctrl(logic)
 
    def serial_connect(self):
       print("Connect")
