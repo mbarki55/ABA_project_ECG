@@ -19,9 +19,10 @@ while True:
         response_parts = str(received_response).split('00')
         if len(response_parts) > 1 and len(response_parts[1]) >= 2:
             value = int(response_parts[1][0:2], 16)
-            print("Received response:", value)
-            x_values.append(len(x_values))  
-            y_values.append(value)          
+            if(value <= 100):
+                print("Received response:", value)
+                x_values.append(len(x_values))  
+                y_values.append(value)          
         else:
             print('Invalid response format')
     else:
@@ -30,6 +31,7 @@ while True:
     plt.plot(x_values, y_values)
     plt.xlabel('X')
     plt.ylabel('Y')
+    plt.ylim(90, 120)
     plt.title('Received Response Plot')
     plt.pause(0.05)
     plt.clf()
