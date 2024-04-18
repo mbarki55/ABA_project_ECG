@@ -9,5 +9,34 @@ class SerialCtrl():
        self.com_list = [com[0] for com in ports]
        self.com_list.insert(0, "-")
 
+    def SerialOpen(self, gui):
+      try:
+         self.ser.is_open
+      except:
+          PORT= gui.clicked_com.get()
+          BAUD= gui.clicked_bd.get()
+          self.ser = serial.Serial()
+          self.ser.baudrate= BAUD
+          self.ser.port = PORT
+          self.ser.timeout = 0.1
+         
+      try :
+        if self.ser.is_open:
+           self.ser.status = True
+           
+        else: 
+          PORT= gui.clicked_com.get()
+          BAUD= gui.clicked_bd.get()
+          self.ser = serial.Serial()
+          self.ser.baudrate= BAUD
+          self.ser.port = PORT
+          self.ser.timeout = 0.1
+          self.ser.open()
+          self.ser.status = True
+      except:
+          self.ser.status = False
+        
+
+
 if __name__=="__main__":
     SerialCtrl()

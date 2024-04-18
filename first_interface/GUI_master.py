@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 class RootGUI:
     def __init__(self):
@@ -68,7 +69,24 @@ class ComGUI():
       self.Connect_ctrl(logic)
 
    def serial_connect(self):
-      print("Connect")
+      if self.btn_connect ["text"] in "Connect":
+         self.serial.SerialOpen(self)
+         if self.serial.ser.status:
+            self.btn_connect["text"] = "Disconnect" 
+            self.btn_refresh["state"] = "disable" 
+            self.drop_bd["state"] = "disable" 
+            self.drop_com["state"] = "disable" 
+            InfoMsg = f"Successful UART connecting using {self.clicked_com.get()}"
+            messagebox.showinfo("showinfo", InfoMsg)
+
+         else:
+            ErrorMsg = f"Failure to estabish UART connecting using {self.clicked_com.get()}"
+            messagebox.showerror("showerror", ErrorMsg)
+      else:
+         self.btn_connect["text"] = "Connect" 
+         self.btn_refresh["state"] = "active" 
+         self.drop_bd["state"] = "active" 
+         self.drop_com["state"] = "active" 
 
 if __name__=="__main__":
   RootGUI()
