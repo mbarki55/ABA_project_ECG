@@ -35,7 +35,17 @@ class SerialCtrl():
           self.ser.status = True
       except:
           self.ser.status = False
-        
+          
+    def SerialClose(self):
+       try:
+          self.ser.is_open
+          self.ser.close()
+          self.ser.status = False
+       except:
+          self.ser.status = False
+      
+          
+              
 
 
 if __name__=="__main__":
