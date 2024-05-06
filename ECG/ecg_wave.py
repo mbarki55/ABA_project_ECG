@@ -1,6 +1,6 @@
 import serial
 
-
+modi
 serial_port = 'COM3'
 baud_rate = 115200
 data_to_send = b'\x55\xAA\x04\xFB\x01\xFF'
