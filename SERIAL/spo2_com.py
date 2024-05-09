@@ -33,7 +33,7 @@ try:
             # Read response from the serial port
             response = ser.read()
             # print(response)
-            if response == b"\x55":
+            if response == b"\x55" :
                 # print("55 found")
                 data_table.append(response)
 
@@ -45,25 +45,25 @@ try:
                         # print(data_table)
                         # print(len(data_table))
                         break
-                if (len(data_table) >= 6):
-                    if data_table[3] == b"\xFE" :
-                        hex_value = data_table[4].hex()  
-                        decimal_value = int(hex_value, 16) 
-                        print("SPO2 found",decimal_value)
+                # if (len(data_table) >= 6):
+                #     if data_table[3] == b"\xFE" :
+                #         hex_value = data_table[4].hex()  
+                #         decimal_value = int(hex_value, 16) 
+                #         print("SPO2 found",decimal_value)
                         
-                        x_values.append(time.time())
-                        y_decimal_value.append(decimal_value)
+                #         x_values.append(time.time())
+                #         y_decimal_value.append(decimal_value)
                                 
-                    ax.clear()            
-                    ax.plot(x_values, y_decimal_value)
+                #     ax.clear()            
+                #     ax.plot(x_values, y_decimal_value)
                     
-                    plt.xlabel('X')
-                    plt.ylabel('Y')
-                    plt.title('Received Response Plot')
-                    ax = plt.gca()
-                    #plt.clf()
-                    plt.pause(0.01)
-                    #break
+                #     plt.xlabel('X')
+                #     plt.ylabel('Y')
+                #     plt.title('Received Response Plot')
+                #     ax = plt.gca()
+                #     #plt.clf()
+                #     plt.pause(0.01)
+                #     #break
                     
 
 except serial.SerialException as e:
