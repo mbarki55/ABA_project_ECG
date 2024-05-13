@@ -10,6 +10,8 @@ baud_rate = 115200
 data_to_send = b'\x55\xAA\x04\x01\x01\xF9'
 # NIBP 
 # data_to_send = b'\x55\xAA\x04\x02\x01\xF8'
+# ECG wave
+data_to_send = b'\x55\xAA\x04\xFB\x01\xFF'
 data_table = []
 
 
@@ -40,34 +42,34 @@ try:
                     record = True
                     
                     if(len(data_table) > 0 and len(data_table) >3 ):
-                        # if(data_table[3]== '01'):
-                        #     # print('ecg',data_table)
-                        #     if (len(data_table) > 4):
-                        #         decimal_value = int(data_table[4], 16)
-                        #         print("I found", data_table)
-                         if(data_table[2]== '09'):
+                        if(data_table[3]== '01'):
                             # print('ecg',data_table)
                             if (len(data_table) > 4):
                                 decimal_value = int(data_table[4], 16)
-                                binary_value = bin(decimal_value)[2:]
+                                print("I found", data_table)
+                        #  if(data_table[2]== '09'):
+                        #     # print('ecg',data_table)
+                        #     if (len(data_table) > 4):
+                        #         decimal_value = int(data_table[4], 16)
+                        #         binary_value = bin(decimal_value)[2:]
 
-                                print("I found", binary_value)
+                        #         print("I found", binary_value)
 
-                    #             x_values.append(time.time())
-                    #             y_decimal_value.append(decimal_value)
+                                x_values.append(time.time())
+                                y_decimal_value.append(decimal_value)
 
-                    #             x_values = x_values[-100:]
-                    #             y_decimal_value = y_decimal_value[-100:]
+                                x_values = x_values[-100:]
+                                y_decimal_value = y_decimal_value[-100:]
                                         
-                    #             ax.clear() 
-                    #             ax.plot(x_values, y_decimal_value)
+                                ax.clear() 
+                                ax.plot(x_values, y_decimal_value)
                                 
-                    #             ax.set_xlabel('Time')  
-                    #             ax.set_ylabel('Value') 
-                    #             ax.set_title('Real-time Plot')
-                    #             plt.ylim(0, 300)  
+                                ax.set_xlabel('Time')  
+                                ax.set_ylabel('Value') 
+                                ax.set_title('Real-time Plot')
+                                plt.ylim(0, 300)  
                                 
-                    #             plt.pause(0.1)
+                                plt.pause(0.1)
 
                     data_table = []  
                     data_table.append(response.hex())
